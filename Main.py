@@ -31,12 +31,12 @@ g.addAresta("Garanhuns","Capoeiras",25.2, 0)
 g.addAresta("Garanhuns","Jupi",23.7, 0)
 g.addAresta("Garanhuns","Canhotinho",35.8, 0)
 
-g.addAresta("Capoeiras","São Bento do Una",33.6, 0)#aresta amarela + 25
+g.addAresta("Capoeiras","São Bento do Una",33.6, 25)#aresta amarela + 25
 g.addAresta("Jupi","Lajedo",13.2, 0)
 g.addAresta("Canhotinho","Lajedo",32, 0)
 
 g.addAresta("São Bento do Una","Belo Jardim",25.7, 0)
-g.addAresta("São Bento do Una","Lajedo",20.3, 0)#aresta laranja + 20
+g.addAresta("São Bento do Una","Lajedo",20.3, 20)#aresta laranja + 20
 g.addAresta("Lajedo","Cachoeirinha",21.3, 0)
 g.addAresta("Lajedo","Jurema",30.9, 0)
 
