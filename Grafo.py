@@ -9,10 +9,10 @@ class Grafo:
         self.vertices = [] #lista de vertices
         self.arestas = [] #lista de arestas
 
-    # Métodos padrão grafos
-    def addVertice(self, nome, valor):
+    # Métodos padrões do grafo
+    def addVertice(self, nome, heuristica):
         if not self.contem(nome):
-            self.vertices.append(Vertice(nome, valor))
+            self.vertices.append(Vertice(nome, heuristica))
 
     def addAresta(self, origem, destino, peso, tempo):
         vOrigem = self.obterVertice(origem)
@@ -74,7 +74,7 @@ class Grafo:
             aux.append(v_inicial)
             while(len(aux) != 0):
                 u = aux.pop(0)
-                caminhos.append(u.getNome())
+                caminhos.append(u.getNome())#Armazenar esse caminho
                 if u == self.obterVertice(destino):#se é objetivo
                     caminhos.append(None)#guardar total custo
                     caminhos[-1] = "Total = "+str(u.getCusto())
@@ -86,15 +86,15 @@ class Grafo:
                 for v in self.adjacentes(u.getNome()):
                     
                     if v.getCor() != Vertice.PRETO:
-                        #G(n):
+                        #           G(n):
                         v.setCusto(u.getCusto()+self.obterAresta(u, v).getPeso())
-                        #G(n) + a condição que é o tempo:
-                        peso = v.getCusto() + self.obterAresta(u, v).getTempo()
-                        #h <= h*:
-                        if (v.getValor() <= menor and v.getCor() == Vertice.BRANCO): 
-                            menor = v.getValor() #G(n)
+                        #      G(n) + a condição que é o tempo, mas apenas para informar:
+                        total = v.getCusto() + self.obterAresta(u, v).getTempo()
+                        # Aqui o mesmo só escolhe o menor valor heurístico:
+                        if (v.getHeuristica() <= menor and v.getCor() == Vertice.BRANCO): 
+                            menor = v.getHeuristica() #G(n)
                             menorVertice = v
-                            menorVertice.setCusto(peso)
+                            menorVertice.setCusto(total)
                         v.setCor(Vertice.CINZA)
                         
                 menorVertice.setCor(Vertice.PRETO)
@@ -118,7 +118,7 @@ class Grafo:
             aux.append(v_inicial)
             while(len(aux) != 0):
                 u = aux.pop(0)
-                caminhos.append(u.getNome())
+                caminhos.append(u.getNome())#Armazenar esse caminho
                 if u == self.obterVertice(destino):#Se é objetivo
                     caminhos.append(None)#guardar total custo
                     caminhos[-1] = "Total = "+str(u.getCusto())
@@ -130,15 +130,15 @@ class Grafo:
                 for v in self.adjacentes(u.getNome()):
                     
                     if v.getCor() != Vertice.PRETO:
-                        #G(n):
-                        v.setCusto(u.getCusto()+self.obterAresta(u, v).getPeso())
-                        #G(n) + a condição que é o tempo:
-                        peso = v.getCusto() + self.obterAresta(u, v).getTempo()
+                        #          G(n):
+                        v.setCusto(u.getCusto() + self.obterAresta(u, v).getPeso())
+                        #       G(n) + a condição que é o tempo:
+                        total = v.getCusto() + self.obterAresta(u, v).getTempo()
                         #h <= h*:
-                        if ((peso + v.getValor()) <= menor and v.getCor() == Vertice.BRANCO):
-                            menor = peso + v.getValor() #G(n) + H(n)
+                        if ((total + v.getHeuristica()) <= menor and v.getCor() == Vertice.BRANCO):
+                            menor = total + v.getHeuristica() #G(n) + H(n)
                             menorVertice = v
-                            menorVertice.setCusto(peso)
+                            menorVertice.setCusto(total)
                         v.setCor(Vertice.CINZA)
 
                 menorVertice.setCor(Vertice.PRETO)

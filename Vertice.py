@@ -5,23 +5,23 @@ class Vertice:
     CINZA = 1 #public
     PRETO = 2 #public
     
-    def __init__(self, nome, valor):
+    def __init__(self, nome, heuristica):
         #Declaração variáveis private
         self.nome = nome
-        self.valor = valor #Valor heurístico
+        self.heuristica = heuristica #Valor heurístico
         self.custo = 0 #Calcular os somatórios
         self.cor = self.BRANCO #Inicia todos branco
-        self.predecessor = None
+        self.predecessor = None #Apenas para testes fora do projeto
 
     def getNome(self):
     	return self.nome
     def setNome(self, nome):
     	self.nome = nome
 
-    def getValor(self):
-    	return self.valor
-    def setValor(self, valor):
-    	self.valor = valor
+    def getHeuristica(self):
+    	return self.heuristica
+    def setHeuristica(self, heuristica):
+    	self.heuristica = heuristica
 
     def getCusto(self):
         return self.custo
